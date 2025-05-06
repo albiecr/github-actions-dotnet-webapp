@@ -1,0 +1,25 @@
+name: Meu Workflow Automatizado
+on:
+  push:  # Acionado quando houver um push no repositório
+    branches: [ main ] 
+  schedule:
+    - cron: '0 * * * *'  # Executa a cada hora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Executar script personalizado
+        run: |
+          echo "Este é um script personalizado rodando no GitHub Actions!"
+          chmod +x meu_script.sh  # Se tiver um script, torne-o executável
+          ./meu_script.sh        # Executa o script
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
